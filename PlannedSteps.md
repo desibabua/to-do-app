@@ -2,22 +2,21 @@
 
 STEP 1:-
 
-- [ ] Setup Github accounts/ collaboration techniques.
-- [ ] Create docker  Image. Push it to our personal docker registry.
-- [ ] Push it to collaborated account.
-- [ ] Test - pull the image and check running fine.
+- [x] Setup Github accounts/ collaboration techniques.
+- [x] Create docker  Image. Push it to our personal docker registry.
+- [x] Push it to collaborated account.
+- [x] Test - pull the image and check running fine.
 
 Tech Stack :-
-- [ ] Docker + colima
+- [x] Docker + colima
 
 STEP 2 :-
 - [ ] Set up initial yaml for Kubernetes with correct no of pods and kind.
 - [ ] Run it Kubernetes cluster in our local.
 - [ ] Test - hosting working fine in local, with now downtime when new version or any changes applied
-- [ ] 
+
 Tech Stack :-
 - [ ] Kubernetes
-- [ ] 
 
 STEP 3:-
 - [ ] Create EKS cluster, security groups, vpc and I’m roles manually through AWS management tool.
