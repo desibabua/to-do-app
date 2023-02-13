@@ -9,7 +9,7 @@
 [![To-do-App](https://img.shields.io/badge/Tryit-(here)-blue.svg)](https://to-do-app-gold.vercel.app/)
 ![demo](./src/assets/demo.gif)
 
-
+[[Steps Planned for assignment](PlannedStteps.md)]
   
 ## Features
 

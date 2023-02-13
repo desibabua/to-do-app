@@ -11,12 +11,12 @@ Tech Stack :-
 - [x] Docker + colima
 
 STEP 2 :-
-- [ ] Set up initial yaml for Kubernetes with correct no of pods and kind.
-- [ ] Run it Kubernetes cluster in our local.
-- [ ] Test - hosting working fine in local, with now downtime when new version or any changes applied
+- [x] Set up initial yaml for Kubernetes with correct no of pods and kind.
+- [x] Run it Kubernetes cluster in our local.
+- [x] Test - hosting working fine in local, with now downtime when new version or any changes applied
 
 Tech Stack :-
-- [ ] Kubernetes
+- [x] Kubernetes
 
 STEP 3:-
 - [ ] Create EKS cluster, security groups, vpc and I’m roles manually through AWS management tool.

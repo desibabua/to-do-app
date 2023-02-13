@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: to-do-app-deployment
+  labels:
+    app: to-do-app
+
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: to-do-app
+
+  template:
+    metadata:
+      labels:
+        app: to-do-app
+    spec:
+      containers:
+      - name: to-do-app
+        image: ayushkr/to-do-app
+
+        ports:
+        - containerPort: 3000
+        nodePort: 2000
+
+        env:
+        - name: VERSION
+          value: "2.0"
+
+# kubectl port-forward to-do-app-deployment-9ffb5f749-25bmn 5005:3000
