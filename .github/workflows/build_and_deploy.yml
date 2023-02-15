@@ -42,13 +42,15 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:testing
+
+  
 
 
-  apply-infrastructure:
-    needs: [build-and-test, deploy-and-push-docker-image]
-    runs-on: ubuntu-latest
+  # apply-infrastructure:
+  #   needs: [build-and-test, deploy-and-push-docker-image]
+  #   runs-on: ubuntu-latest
 
-    steps: 
-    - name: terraform apply
-      run: echo "Will apply terraform files."
+  #   steps: 
+  #   - name: terraform apply
+  #     run: echo "Will apply terraform files."
