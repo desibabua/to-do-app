@@ -29,9 +29,8 @@ resource "aws_iam_role" "ayush_infra_iam_role" {
 
 # Attaching required policy to role created for cluster
 
-resource "aws_iam_policy_attachment" "ayush_policy_attachment" {
-  name       = "ayush_policy_attachment"
-  roles      = ["${aws_iam_role.ayush_infra_iam_role.name}"]
+resource "aws_iam_role_policy_attachment" "ayush_policy_attachment" {
+  role      = "${aws_iam_role.ayush_infra_iam_role.name}"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
 }
 
@@ -99,21 +98,18 @@ resource "aws_iam_role" "ayush_infra_iam_role_for_worker_node" {
 
 # Attaching required policy to role created for worker node
 
-resource "aws_iam_policy_attachment" "AmazonEKSWorkerNodePolicy_attachment" {
-  name       = "AmazonEKSWorkerNodePolicy_attachment"
-  roles      = ["${aws_iam_role.ayush_infra_iam_role_for_worker_node.name}"]
+resource "aws_iam_role_policy_attachment" "AmazonEKSWorkerNodePolicy_attachment" {
+  role      = "${aws_iam_role.ayush_infra_iam_role_for_worker_node.name}"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
 }
 
-resource "aws_iam_policy_attachment" "AmazonEC2ContainerRegistryReadOnly_attachment" {
-  name       = "AmazonEC2ContainerRegistryReadOnly_attachment"
-  roles      = ["${aws_iam_role.ayush_infra_iam_role_for_worker_node.name}"]
+resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly_attachment" {
+  role      = "${aws_iam_role.ayush_infra_iam_role_for_worker_node.name}"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
 
-resource "aws_iam_policy_attachment" "AmazonEKS_CNI_Policy_attachment" {
-  name       = "AmazonEKS_CNI_Policy_attachment"
-  roles      = ["${aws_iam_role.ayush_infra_iam_role_for_worker_node.name}"]
+resource "aws_iam_role_policy_attachment" "AmazonEKS_CNI_Policy_attachment" {
+  role      = "${aws_iam_role.ayush_infra_iam_role_for_worker_node.name}"
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
 }
 
@@ -141,9 +137,4 @@ resource "aws_eks_node_group" "ayush_infra_node_group" {
   capacity_type  = "ON_DEMAND"
   disk_size      = 20
 
-  depends_on = [
-    aws_iam_policy_attachment.AmazonEKSWorkerNodePolicy_attachment,
-    aws_iam_policy_attachment.AmazonEC2ContainerRegistryReadOnly_attachment,
-    aws_iam_policy_attachment.AmazonEKS_CNI_Policy_attachment,
-  ]
 }
