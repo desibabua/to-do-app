@@ -27,6 +27,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Declare some variables
+      id: vars
+      shell: bash
+      run: |
+        echo ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:${{ steps.vars.outputs.sha_short }}
+        echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
@@ -42,7 +50,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:testing
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:${{ steps.vars.outputs.sha_short }}
 
   
 
