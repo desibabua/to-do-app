@@ -8,7 +8,6 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-
 # Creating IAM role for cluster
 
 data "aws_iam_policy_document" "ayush_assume_role_policy" {
@@ -76,10 +75,6 @@ resource "aws_eks_cluster" "ayush_infra_eks_cluster" {
     subnet_ids         = ["subnet-0d6cf0838053435a9", "subnet-0d9c79b537d591ab2", "subnet-097dcf4c27c763332", "subnet-097e8dccbf700f80b"]
     security_group_ids = ["${aws_security_group.ayush_infra_sg.id}"]
   }
-
-  #   depends_on = [
-  #     aws_iam_role_policy_attachment.AmazonEKSClusterPolicy
-  #   ]
 }
 
 # Creating IAM role for worker node
@@ -142,7 +137,7 @@ resource "aws_eks_node_group" "ayush_infra_node_group" {
   }
 
   ami_type       = "AL2_x86_64"
-  instance_types = ["t2.micro"]
+  instance_types = ["t2.small"]
   capacity_type  = "ON_DEMAND"
   disk_size      = 20
 
@@ -151,8 +146,4 @@ resource "aws_eks_node_group" "ayush_infra_node_group" {
     aws_iam_policy_attachment.AmazonEC2ContainerRegistryReadOnly_attachment,
     aws_iam_policy_attachment.AmazonEKS_CNI_Policy_attachment,
   ]
-}
-
-output "endpoint" {
-  value = aws_eks_cluster.ayush_infra_eks_cluster.endpoint
 }
