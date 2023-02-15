@@ -31,7 +31,7 @@ jobs:
       id: vars
       shell: bash
       run: |
-        echo ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:${{ steps.vars.outputs.sha_short }}
+        echo "to-do-app:main-$(git rev-parse --short HEAD)"
         echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
 
@@ -50,15 +50,9 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:${{ steps.vars.outputs.sha_short }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:main-${{ steps.vars.outputs.sha_short }}
 
-  
-
-
-  # apply-infrastructure:
-  #   needs: [build-and-test, deploy-and-push-docker-image]
-  #   runs-on: ubuntu-latest
-
-  #   steps: 
-  #   - name: terraform apply
-  #     run: echo "Will apply terraform files."
+    - name: Create deployment file from template
+      run: |
+        sed -e 's/<DOCKER_IMAGE_TAG>/${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:main-${{ steps.vars.outputs.sha_short }}/g' ./infra/k8s/deployment_template.yml > ./infra/k8s/deployment.yml
+        cat ./infra/k8s/deployment.yml

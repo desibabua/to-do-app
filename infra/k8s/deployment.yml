@@ -18,13 +18,8 @@ spec:
     spec:
       containers:
       - name: to-do-app
-        image: ayushkr/to-do-app
 
         ports:
         - containerPort: 3000
 
-        env:
-        - name: VERSION
-          value: "1.0"
-
-# kubectl port-forward to-do-app-deployment-9ffb5f749-25bmn 5005:3000
+        image: 
