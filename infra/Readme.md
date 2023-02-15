@@ -3,7 +3,7 @@
 
 I am role 
  - one for eks cluster
- - second for node group
+
 
 vpc - (default) and subnets (default) (2 public and 2 private)
 
@@ -16,8 +16,11 @@ cluster -
 - vpc, subnets
 - security group
 
-namespace
-- for cluster
+<!-- namespace
+- for cluster -->
+
+I am role 
+ - second for node group
 
 node group
 - I am role

@@ -1,0 +1,76 @@
+-----------commonly used commands-----------
+
+colima start
+minikube start
+docker ps
+docker ps -a
+docker run -p 8081:8080 -v /Users/ayushkumar/infra_training/:/var/jenkins_home jenkins/jenkins
+docker build -t ayushkumar/infracubator .
+docker images
+docker run ayushkumar/infracubator -p 3000:3000
+docker login
+docker push ayushkr/infracubator
+docker rmi ayushkr/infracubator 
+docker rm a0afe77b6c22
+docker volume create my_volume
+docker volume ls
+docker run -p 8080:80 -d nginx --mount source=my_volume,target=/app
+docker stop 7f256aba71e511713f6f3c9715daebf9a8819ddc1cbaaf3a206df435c5d677d0
+docker rm 7f256aba71e511713f6f3c9715daebf9a8819ddc1cbaaf3a206df435c5d677d0
+docker run -p 8080:80 -d nginx --mount source=my_volume,target=/app -name container1
+docker logs c45a43510322
+docker run -d -p 8083:80 --name container2 --mount source=my_volume,target=/app nginx
+docker inspect bc231084f29f
+docker exec -it e0ba90f6815c bash
+
+kubectl create -f myk8xs.yml
+kubectl delete infracubatordemo1
+kubectl get pods
+kubectl get pods -o wide
+minikube ssh
+kubectl delete -f myk8xs.yml
+kubectl apply -f dobby-deployment.yaml
+kubectl rollout history deployment/dobby
+kubectl rollout history deployment/dobby --to-revision=1
+kubectl rollout undo deployment/dobby --to-revision=1
+
+terraform init
+terraform plan
+terraform apply
+terraform show
+terraform state list
+terraform destroy
+terraform output
+terraform status
+terraform --help
+cd python-helloworld
+
+
+kubectl get pods
+watch kubectl get deployments
+watch kubectl get replicasets
+kubectl port-forward to-do-app-deployment-9ffb5f749-25bmn 5005:3000
+
+
+aws iam create-role  --role-name ayushEksClusterRole  --assume-role-policy-document file://"aws-eks-cluster-role.json"
+aws iam attach-role-policy  --policy-arn arn:aws:iam::aws:policy/AmazonEKSClusterPolicy --role-name ayushEksClusterRole
+
+aws eks update-kubeconfig --region ap-south-1 --name ayushEksCluster
+
+kubectl get svc
+aws get namespaces
+kubectl create namespace ayush-to-do-app
+kubectl config set-context –current –namespace=ayush-to-do-app
+
+kubectl apply -f ../k8s.deployment.yml
+kubectl get pods -n ayush-to-do-app
+kubectl get nodes
+kubectl describe -n ayush-to-do-app pod to-do-app-deployment-54f47767d-qm4j4
+
+kubectl get deployments -n ayush-to-do-app -o wide
+kubectl describe deployment -n ayush-to-do-app to-do-app-deployment
+kubectl describe rs -n ayush-to-do-app to-do-app-deployment-54f47767d
+kubectl get pods -n ayush-to-do-app -o wide
+
+kubectl expose deployment -n ayush-to-do-app to-do-app-deployment --type=LoadBalancer
+kubectl describe -n ayush-to-do-app  service/to-do-app-deployment

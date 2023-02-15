@@ -19,7 +19,7 @@ Tech Stack :-
 - [x] Kubernetes
 
 STEP 3:-
-- [ ] Create EKS cluster, security groups, vpc and I’m roles manually through AWS management tool.
+- [x] Create EKS cluster, security groups, vpc and I’m roles manually through AWS management tool.
 - [ ] Create security group , vpc through Yaml
 - [ ] Create IAM role and provide 
 - [ ] create EKS cluster and run the application in that.
