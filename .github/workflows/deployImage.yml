@@ -5,7 +5,7 @@ on:
       - "main"
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +17,15 @@ jobs:
 
     - name: Build and test
       run: yarn test
+
+
+  deploy-and-push-docker-image:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
 
     - name: Login to Docker Hub
       uses: docker/login-action@v2
@@ -34,3 +43,12 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:latest
+
+
+  apply-infrastructure:
+    needs: [build-and-test, deploy-and-push-docker-image]
+    runs-on: ubuntu-latest
+
+    steps: 
+    - name: terraform apply
+      run: echo "Will apply terraform files."
