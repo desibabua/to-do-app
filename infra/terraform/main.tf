@@ -138,3 +138,12 @@ resource "aws_eks_node_group" "ayush_infra_node_group" {
   disk_size      = 20
 
 }
+
+resource "aws_ecr_repository" "ayush_infra_to_do_app_ecr" {
+  name                 = "ayush_infra_to_do_app_ecr"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+}

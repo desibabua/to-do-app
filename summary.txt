@@ -1,0 +1,32 @@
+Day 1:-
+
+- we started with docker image.
+- successfully created it.
+- It was taking lot of time to create an image and it was of big size of approx 700mb
+- We read documentation and tried parallaly lot of ways with different version of node.
+- finally one solution we found was multi stage building which was promissing
+- but after lot of attempts we not able to run the file.
+
+the silly mistage was we missed the missed the one copy layer from one stage to another
+
+then we ran through kubernetes and the pods were working fine 
+but the next challenge was to hit on local host url.
+
+Day 2:
+
+we started with manual creation
+first we thought it will be easy.
+but got lot my configuration confustion.
+
+so tackle that by a very nice plan
+we were creating paralley with different configuration and then whoever's is working we followed that config.
+we used divide and concur.
+
+Day 3 :-
+
+starting with terrafrom it went smooth.
+we didn't faced issue while doing CI/CD, till the image building and pushing to the docker registory.
+
+then challenge start we have to connect EKS cluster to this new image every time.
+which we figured in the end that we have to push the image on ECR registory instead of docker hub.
+and connect eks and ecr in aws.

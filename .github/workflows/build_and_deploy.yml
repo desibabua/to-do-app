@@ -42,7 +42,8 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+      id: buildx
+      uses: docker/setup-buildx-action@master
 
     - name: Build and push
       uses: docker/build-push-action@v4
@@ -52,7 +53,56 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:main-${{ steps.vars.outputs.sha_short }}
 
-    - name: Create deployment file from template
-      run: |
-        sed -e 's/<DOCKER_IMAGE_TAG>/${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:main-${{ steps.vars.outputs.sha_short }}/g' ./infra/k8s/deployment_template.yml > ./infra/k8s/deployment.yml
-        cat ./infra/k8s/deployment.yml
+
+    # - name: Build and push
+    #   uses: docker/build-push-action@v4
+    #   with:
+    #     context: .
+    #     file: ./Dockerfile
+    #     push: true
+    #     tags: ${{ secrets.DOCKERHUB_USERNAME }}/to-do-app:main-${{ steps.vars.outputs.sha_short }}
+
+    # - name: Docker cache layers                              
+    #   uses: actions/cache@v2                                 
+    #   with:                                                  
+    #     path: /tmp/.buildx-cache                             
+    #     key: ${{ runner.os }}-single-buildx-${{ github.sha }}
+    #     restore-keys: |                                      
+    #       ${{ runner.os }}-single-buildx 
+
+    # - name: Build & Push Image                                                                                      
+    #   env:                                                                                                          
+    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}                                                       
+    #     RELEASE_IMAGE: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.RELEASE_REVISION }}
+    #   run: |
+    #     docker buildx create --use
+
+    #     docker buildx build \                                
+    #       --cache-from=type=local,src=/tmp/.buildx-cache \   
+    #       --cache-to=type=local,dest=/tmp/.buildx-cache-new \
+    #       --tag ${{ env.RELEASE_IMAGE }} \  
+    #       --target release \                                 
+    #       --push \                                           
+    #       .                                                  
+
+    #     rm -rf /tmp/.buildx-cache
+    #     mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
+  # release: 
+  #   needs: deploy-and-push-docker-image
+  #   runs-on: ubuntu-latest
+
+  #   steps:                                    
+  #   - name: Checkout                                  
+  #     uses: actions/checkout@v2
+
+  #   - name: Configure AWS credentials                          
+  #     uses: aws-actions/configure-aws-credentials@v1           
+  #     with:                                                    
+  #       aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}        
+  #       aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
+  #       aws-region: ${{ env.AWS_REGION }}
+
+  #   - name: Login to Amazon ECR            
+  #     id: login-ecr                        
+  #     uses: aws-actions/amazon-ecr-login@v1
