@@ -20,14 +20,14 @@ Tech Stack :-
 
 STEP 3:-
 - [x] Create EKS cluster, security groups, vpc and I’m roles manually through AWS management tool.
-- [ ] Create security group , vpc through Yaml
-- [ ] Create IAM role and provide 
-- [ ] create EKS cluster and run the application in that.
-- [ ] Testing - running EKS cluster with added test for terraform files.
+- [x] Create security group , vpc through Yaml
+- [x] Create IAM role and provide 
+- [x] create EKS cluster and run the application in that.
+- [x] Testing - running EKS cluster with added test for terraform files.
 
 Tech Stack :-
-- [ ] Terraform 
-- [ ] Aws
+- [x] Terraform 
+- [x] Aws
 
 STEP 4:-
 - [ ] Create initial workflow with install, test and build
